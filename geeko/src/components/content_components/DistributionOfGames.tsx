@@ -1,12 +1,13 @@
 import React, { ReactElement, useEffect, useState } from 'react'
 
+
 interface Props {
     
 }
 
 
 
-export default function Distributionofgames({}: Props): ReactElement {
+function Distributionofgames({}: Props): ReactElement {
     const [email, setEmail] = useState('');
     const [emailDirty, setEmailDirty] = useState(false);
     const [emailError, setEmailError] = useState('Емейл не может быть пустым');
@@ -42,7 +43,7 @@ export default function Distributionofgames({}: Props): ReactElement {
         }
     }
 
-
+    
 
     return (
     <div className='distributionofgames'>
@@ -56,3 +57,5 @@ export default function Distributionofgames({}: Props): ReactElement {
    </div>
     )
 }
+
+export default Distributionofgames

@@ -1,20 +1,78 @@
-import React, { Component } from 'react'
+import React, { ReactElement, useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 
 interface Props {
     
 }
-interface State {
-    
-}
 
-export default class Login extends Component<Props, State> {
-    state = {}
+export default function Login({}: Props): ReactElement {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('')
+    const [emailDirty, setEmailDirty] = useState(false)
+    const [passwordDirty, setPasswordDirty] = useState(false)
+    const [emailError, setEmailError] = useState('Емейл не может быть пустым');
+    const [passwordError, setPasswordError] = useState('Пароль не может быть пустым')
+    const [formValid, setFormValid] = useState(false);
+    let count: number;
+    count = 0;
 
-    render() {
-        return (
-            <div>
-                
-            </div>
-        )
+    useEffect(() => {
+        if (emailError || passwordError){
+            setFormValid(false)
+        }else
+            setFormValid(true)
+            count++;
+    }, [emailError, passwordError])
+        
+
+    const emailHandler = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+        setEmail(e.target.value);
+        const re = (/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+        if(!re.test(String(e.target.value).toLowerCase())){
+            setEmailError('Емейл некорректен!')
+        }else
+            setEmailError('')
+           // e.preventDefault();
     }
+
+    const passwordHandler = (e: any) => {
+        setPassword(e.target.value)
+        if(e.target.value.length < 6 || e.target.value.length > 12){
+            setPasswordError('Пароль должен быть длиннее 6 и меньше 12')
+            if(!e.target.value){
+                setPasswordError('Пароль не может быть пустым')
+            }
+        }else
+        setPasswordError('')
+    }
+
+
+    const blurHandler = (e: React.FocusEvent<HTMLInputElement>) => {
+        switch (e.target.name){
+            case 'email':
+                setEmailDirty(true)
+                break
+            case 'password':
+                setPasswordDirty(true)
+        }
+    }
+
+    
+
+    return (
+    <div className='distributionofgames'>
+        <form className='login'>
+           <h1>Логин</h1>
+           {(emailDirty && emailError) && <div style={{color:'red'}}>{emailError}</div>}
+           <input onChange={e => emailHandler(e)} value = {email} onBlur={e => blurHandler(e)} name='email' type='text' placeholder='Enter your email.....' />
+           {(passwordError && passwordDirty) && <div style={{color:'red'}}>{passwordError}</div>}
+           <input onChange={e => passwordHandler(e)} value = {password} onBlur={e => blurHandler(e)} name='password' type='password' placeholder='Enter your password.....' />
+           <Link to='/'>
+               <button disabled={!formValid} type='submit'>Войти</button>
+               </Link>
+       </form>
+   </div>
+    )
 }
+
+
