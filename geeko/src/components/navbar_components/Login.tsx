@@ -1,5 +1,6 @@
 import React, { ReactElement, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
+import "../../styles/navbar_component_styles/Login.css";
 
 interface Props {
     
@@ -64,11 +65,11 @@ export default function Login({}: Props): ReactElement {
         <form className='login'>
            <h1>Логин</h1>
            {(emailDirty && emailError) && <div style={{color:'red'}}>{emailError}</div>}
-           <input onChange={e => emailHandler(e)} value = {email} onBlur={e => blurHandler(e)} name='email' type='text' placeholder='Enter your email.....' />
+           <input onChange={e => emailHandler(e)} value = {email} onBlur={e => blurHandler(e)} name='email' type='text' placeholder='Email' />
            {(passwordError && passwordDirty) && <div style={{color:'red'}}>{passwordError}</div>}
-           <input onChange={e => passwordHandler(e)} value = {password} onBlur={e => blurHandler(e)} name='password' type='password' placeholder='Enter your password.....' />
+           <input onChange={e => passwordHandler(e)} value = {password} onBlur={e => blurHandler(e)} name='password' type='password' placeholder='Password' />
            <Link to='/'>
-               <button disabled={!formValid} type='submit'>Войти</button>
+               <button className='button' disabled={!formValid} type='submit'>Войти</button>
                </Link>
        </form>
    </div>

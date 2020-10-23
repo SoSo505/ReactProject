@@ -1,5 +1,5 @@
 import React, { ReactElement, useEffect, useState } from 'react'
-
+import "../../styles/content_component_styles/DistributionOfgames.css";
 
 interface Props {
     
@@ -47,13 +47,12 @@ function Distributionofgames({}: Props): ReactElement {
 
     return (
     <div className='distributionofgames'>
-        <form>
+        <form className="form">
            <h1>Подписка</h1>
            {(emailDirty && emailError) && <div style={{color:'red'}}>{emailError}</div>}
-           <input onChange={e => emailHandler(e)} value = {email} onBlur={e => blurHandler(e)} name='email' type='text' placeholder='Enter your email.....' />
-           <button disabled={!formValid} type='submit'>Участвовать</button>
+           <input className="form__field" onChange={e => emailHandler(e)} value = {email} onBlur={e => blurHandler(e)} name='email' type='text' placeholder='Your E-Mail Address' />
+           <button className="btn btn--primary btn--inside uppercase" disabled={!formValid} type='submit'>Участвовать</button>
        </form>
-       <label>{count} участников.</label>
    </div>
     )
 }

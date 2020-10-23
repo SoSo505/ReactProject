@@ -1,6 +1,7 @@
 import React, { Component, useContext } from "react";
 import "../../styles/content_component_styles/Games.css";
 import { Link } from "react-router-dom";
+import Distributionofgames from "./DistributionOfGames";
 // import Distributionofgames from "./DistributionOfGames";
 
 
@@ -91,7 +92,7 @@ interface State {
             <button className="game_type" onClick={()=>this.getGames(8)}>Simulator</button>
           </div>
         </div>
-        {/* <Distributionofgames/> */}
+        <Distributionofgames/>
       </div>
     );
   }

@@ -35,7 +35,7 @@ export default function Navbar({}: Props): ReactElement {
              return prevColor == 'red' ? 'white' : 'red' 
            })}>𝕲𝖊𝖊𝖈𝖔</h1>
            <div className="links">
-             <Link className="link" to="/">
+             <Link className="linkk" to="/">
                Home
              </Link>
              <Link className="link" to="/Games">
